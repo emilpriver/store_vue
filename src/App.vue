@@ -9,8 +9,11 @@
         </div>
         
         <nav>
-          <router-link to="/">Home</router-link> 
-          <router-link to="/about">About</router-link>
+          <router-link to="/for-men">Men</router-link> 
+          <router-link to="/for-women">Women</router-link>
+          <router-link to="/for-kids">Kids</router-link>
+          <router-link to="/new-stuffs">New Stuffs</router-link>
+          <router-link to="/latest-drops">Latest Drops</router-link>
         </nav>
 
         <div class="search">
@@ -50,6 +53,7 @@ header#nav {
   width: 100%;
   float: left;
   position: fixed;
+  z-index: 20;
   top: 0;
   left: 0;
   padding-top: 10px;
@@ -93,7 +97,7 @@ header#nav {
       justify-self: flex-start;
 
       a{
-        margin-right: 20px;
+        margin-right: 50px;
         color: #626060;
         text-decoration: none;
         font-weight: 700;
