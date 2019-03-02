@@ -2,6 +2,9 @@
     <footer>
         <div class="socials">
             <h1>Follow us at socials: </h1>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
         </div>
         <div class="con">
             <div class="col">
@@ -74,7 +77,14 @@ footer{
             font-weight: 500;
             font-size: 30px;
             text-transform: uppercase;
+            margin-right: 20px;
         }
+
+        a {
+            font-size: 20px;
+            margin-right: 20px;
+            color: #fff;
+            }
     }
     .con{
         max-width: 1600px;
