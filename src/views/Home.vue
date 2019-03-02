@@ -2,178 +2,141 @@
   <section id="home">
     <Hero />
     
-    <div id="products">
-      <div class="con">
+    <!-- products carousell -->
+    
+    <singleCarousellProduct :products="products" />
+    
+    <!-- end products carousell -->
 
-        <div class="row">
-
-          <h2>For the men</h2>
-          
-          <Slick 
-            ref="slick"
-            :options="slickOptions"
-            @reInit="reInit"
-          >
-            <div v-for="(product,index) in products" v-bind:key="index" class="col">
-              <div class="thumb">
-                <a :href="'/product/' + product.slug">
-                  <img :src="product.thumbnail" />
-                </a>
-              </div>
-              <div class="info">
-                <h3>{{product.title}}</h3>
-              </div>
+    <div id="new-stuffs-blocks">
+      
+      <div class="row">
+        
+        <a v-for="(block,index) in blocks" v-bind:key="index" :href="'/' + block.slug">
+          <div class="block" :style="'background-image:url('+ block.thumbnail +')'">
+            <div class="wrapper">
+              <h1>{{block.title}}</h1>
             </div>
-          </slick>
-
-          <div class="carousell_buttons">
-            <button v-on:click="prev"><i class="fas fa-arrow-left"></i> </button>
-            <button v-on:click="next"><i class="fas fa-arrow-right"></i></button>
           </div>
-
-        </div>
+        </a>
 
       </div>
+
     </div>
 
+    <!-- products carousell -->
+    
+    <singleCarousellProduct :products="products" />
+    
+    <!-- end products carousell -->
+
+    
   </section>
+
 </template>
 
-<script>
 
-//modules
-import axios from 'axios'
-import Slick from 'vue-slick'
-// @ is an alias to /src
-import Hero from '../components/hero'
-//import css
-import '../../node_modules/slick-carousel/slick/slick.css';
-
-export default {
-  name: 'home',
-  data: () => {
-    return{
-      products: [],
-      slickOptions: {
-        slidesToShow: 5,
-        infinite: true,
-        arrows:false,
-      },
-    }
-  },
-  components: {
-    Hero,
-    Slick
-  },
-  mounted () {
-
-    axios.get('http://localhost:5000/api/products')
-    .then(response => (this.products = response.data.products))
-    .then(response => {
-      this.reInit()
-    })
-    .then(() => {console.log(this.products)})
-
-  },
-  methods: {
-
-    next() {
-      this.$refs.slick.next();
-    },
-
-    prev() {
-      this.$refs.slick.prev();
-    },
-    reInit() {
-        // Helpful if you have to deal with v-for to update dynamic lists
-        this.$nextTick(() => {
-            this.$refs.slick.reSlick();
-        });
-    }
-
-  },
-   beforeUpdate() {
-        if (this.$refs.slick) {
-            this.$refs.slick.destroy();
-        }
-    },
-    updated() {
-        this.$nextTick(function () {
-            if (this.$refs.slick) {
-                this.$refs.slick.create(this.slickOptions);
-            }
-        });
-    },
-
-};
-</script>
-
-
-<style lang="scss">
+<style lang="scss" scoped>
 $cabin: 'Cabin', sans-serif;
-
-#products {
+//products block
+#new-stuffs-blocks {
   width: 100%;
   float: left;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding: 10px;
+  box-sizing: border-box;
+  background: #f3eded;
 
-  .con {
-    max-width: 1600px;
-    margin: 0px auto;
-    .row {
-      width: 100%;
-      margin-left: -10px;
-      margin-right: -10px;
+  .row{
+    width: 100%;
+    display: flex;
+    flex-flow: wrap row;
 
-      h2{
-        flex: 0 0 100%;
-        text-align: left;
-        padding-left: 10px;
-        text-transform: uppercase;
-        color: #000;
+    a {
+      flex: 1 0 50%;
+      text-decoration: none;
+      padding-right: 10px;
+      padding-bottom: 10px;
+      box-sizing: border-box;
+
+      &:nth-child(2n + 2){
+        padding-right: 0px;
       }
-      .col{
-        box-sizing: border-box;
-        padding: 10px;
-
-        .thumb {
-          max-width: 100%;
-          img{
-            max-width: 100%;
-            margin: 0px auto;
-            display: block;
-          }
-        }
-        .info {
-          text-align: left;
-          font-family: $cabin;
-        }
+      &:last-of-type{
+        padding-right: 0px;
       }
 
-      .carousell_buttons {
+      .block{
+        min-height: 500px;
         width: 100%;
-        float: left;
-        padding-left: 10px;
-        padding-right: 10px;
+        background-position: center center;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         box-sizing: border-box;
+        position: relative;
 
-        button{
-          float: left;
-          font-size: 25px;
-          color: #8a8282;
-          background: transparent;
-          outline: none;
-          border: none;
-          cursor: pointer;
+        &::before{
+          content: " ";
+          display: block;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          background: linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.904));
+          position: absolute;
+        }
 
-
-          &:last-of-type{
-            float: right;
+        .wrapper{
+          z-index: 1;
+          h1{
+            color: #fff;
+            font-family: $cabin;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 30px;
+            text-transform: uppercase;
           }
         }
       }
     }
   }
 }
+
 </style>
+
+<script>
+
+//modules
+import axios from 'axios'
+// @ is an alias to /src
+import Footer from '../components/footer'
+import Hero from '../components/hero'
+import singleCarousellProduct from '../components/single_carousell_products'
+
+export default {
+  name: 'home',
+  data: () => {
+    return{
+      products: null,
+      blocks: null,
+    }
+  },
+  components: {
+    Hero,
+    singleCarousellProduct,
+    Footer
+  },
+  mounted () {
+    //products
+    axios.get('http://localhost:5000/api/products')
+    .then(response => (this.products = response.data.products))
+
+    //blocks
+    axios.get('http://localhost:5000/api/blocks/front_page')
+    .then(response => (this.blocks = response.data.blocks))
+    .catch(err => console.log(err))
+
+  }
+};
+</script>

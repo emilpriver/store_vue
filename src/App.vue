@@ -1,34 +1,11 @@
 <template>
   <div id="app">
-    <header id="nav">
-
-      <div class="con">
-
-        <div class="logo">
-          <img src="https://emilpriver-spaces.ams3.cdn.digitaloceanspaces.com/logo.png" />
-        </div>
-        
-        <nav>
-          <router-link to="/for-men">Men</router-link> 
-          <router-link to="/for-women">Women</router-link>
-          <router-link to="/for-kids">Kids</router-link>
-          <router-link to="/new-stuffs">New Stuffs</router-link>
-          <router-link to="/latest-drops">Latest Drops</router-link>
-        </nav>
-
-        <div class="search">
-          <i class="fas fa-search"></i>
-        </div>
-
-        <div class="cart">
-          <i class="fas fa-shopping-cart"></i>
-        </div>
-
-      </div>
-
-    </header>
+    
+    <Header />
 
     <router-view/>
+
+    <Footer />
 
   </div>
 </template>
@@ -77,6 +54,7 @@ header#nav {
       align-items: center;
       flex: 0 0 200px;
       justify-self: flex-start;
+      border-right: 1px solid #eee;
 
       img{
         max-width: 300px;
@@ -91,7 +69,9 @@ header#nav {
     nav {
       height: 60px;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
+      padding-left: 20px;
+      box-sizing: border-box;
       align-items: center;
       flex: 1;
       justify-self: flex-start;
@@ -101,7 +81,7 @@ header#nav {
         color: #626060;
         text-decoration: none;
         font-weight: 700;
-        font-size: 16px;
+        font-size: 12px;
         transition: all 0.3s;
         text-transform: uppercase;
         font-family: $cabin;
@@ -137,3 +117,14 @@ header#nav {
 
 
 </style>
+
+<script>
+import Footer from './components/footer'
+import Header from './components/header-menu'
+export default {
+  components: {
+    Footer,
+    Header
+  }
+}
+</script>
