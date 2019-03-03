@@ -12,8 +12,8 @@
     "jquery": "^3.3.1",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
-    "universal-cookie": "^3.0.7",
     "vue": "^2.6.6",
+    "vue-cookies": "^1.5.12",
     "vue-router": "^3.0.1",
     "vue-slick": "^1.1.15"
   },
@@ -24,8 +24,6 @@
     "@vue/eslint-config-airbnb": "^4.0.0",
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0",
     "vue-cli-plugin-axios": "^0.0.4",
     "vue-template-compiler": "^2.5.21"
   },

@@ -28,7 +28,7 @@
                     </div>
                     <div class="row mb-50">
                         <div class="col">
-                            <button> Add to cart </button>
+                            <button v-on:click="add_to_cart"> Add to cart </button>
                         </div>
                     </div>
                     <div class="row">
@@ -43,19 +43,18 @@
 </template>
 
 <script>
-//cookies
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
 
 export default {
     name: 'product',
     data: () => {
         return {
             product: null,
-            loaded: false
+            loaded: false,
+            product_slug: null
         }
     },
     created() {
+        console.log(this.$cookies.get('cart_id'))
 
         //get product
         axios.get('http://localhost:5000/api/products/' + this.$route.params.slug)
@@ -65,32 +64,38 @@ export default {
             this.loaded = true
         })
         .catch(err => console.log(err))
-
+    
     },
     methods:{
-        range:function(start,stop){
+
+        range(start,stop){
             return new Array(stop-start).fill(start).map((n,i)=>n+i);
         },
-        add_to_cart: () => {
+
+        add_to_cart() {
+            
             axios.post('http://localhost:5000/api/cart/add',{
                 slug: this.$route.params.slug,
-                cart_id: cookies.get('cart_id') ? cookies.get('cart_id') : false
+                cart_id: this.$cookies.get('cart_id') ? this.$cookies.get('cart_id') : false
             })
             .then(response => {
-                cookies.set('cart_id', response.data.cart_id, { 
-                    path: '/' 
-                });
+                if(response.data.new_cart){
+                    this.$cookies.set('cart_id', response.data.cart.cart_id);
+                }
             })
             .catch(err => {console.log(err)})
+
         }
     }
+
 }
+
 </script>
 
 <style lang="scss">
 $font: "Helvetica Neue", Helvetica, Arial,'Cabin', sans-serif;
 
-#single_product{
+#single_product {
     width: 100%;
     float: left;
     margin-top: 120px;

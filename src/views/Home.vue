@@ -37,6 +37,7 @@
 
 
 <style lang="scss" scoped>
+/* eslint-disable */
 $cabin: 'Cabin', sans-serif;
 //products block
 #new-stuffs-blocks {
@@ -106,6 +107,7 @@ $cabin: 'Cabin', sans-serif;
 </style>
 
 <script>
+/* eslint-disable */
 
 //modules
 import axios from 'axios'
@@ -139,4 +141,5 @@ export default {
 
   }
 };
+
 </script>
