@@ -28,5 +28,15 @@
 
       </div>
 
+
+
     </header>
 </template>
+
+<script>
+
+//import modules
+import cart from 'cart'
+
+
+</script>

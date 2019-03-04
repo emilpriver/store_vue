@@ -210,9 +210,8 @@ $font: "Helvetica Neue", Helvetica, Arial,'Cabin', sans-serif;
                             border: none;
                             outline: none;
                             font-family: 'Cabin', sans-serif;
-                            font-weight: 700;
+                            font-weight: 500;
                             font-size: 20px;
-                            text-transform: uppercase;
                         }
                         .description {
                             padding: 20px;
